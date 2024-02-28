@@ -112,7 +112,7 @@ const MainPage = () => {
           <Input searchInput={searchInput} setSearchInput={setSearchInput} />
         </div>
         <div className=" flex ">
-          <div className=" w-full items-center justify-center xl:w-[1200px] flex flex-wrap">
+          <div className=" w-full items-start justify-center xl:w-[1200px] flex flex-wrap">
             {productList.map((item, index) => (
               <Card
                 key={index}
