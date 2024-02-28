@@ -12,7 +12,7 @@ const Cart = ({
 }) => {
   return (
     <div className="w-full  xl:w-[600px] h-full xl:h-[800px] border-2 px-2 rounded-none xl:rounded-md bg-white">
-      <h2 className="text-2xl font-bold flex justify-center items-center border-b-2 pt-[16px] xl:pt-0 ">
+      <h2 className="text-xl font-bold flex justify-center items-center border-b-2 pt-[16px] xl:pt-0 ">
         Cart List
       </h2>
       <div className="flex flex-col justify-between h-full py-4">
