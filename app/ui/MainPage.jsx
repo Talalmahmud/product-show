@@ -5,11 +5,14 @@ import Card from "./Card";
 import Cart from "./Cart";
 import CartButton from "./CartButton";
 import { products } from "../lib/product";
+import Input from "./Input";
 
 const MainPage = () => {
+  const [productList, setProductList] = useState(products);
   const [selectedProduct, setSelectedProduct] = useState([]);
   const [toggle, setToggle] = useState(false);
   const [total, setTotal] = useState(0);
+  const [searchInput, setSearchInput] = useState("");
   const totalPrice = (productList) => {
     let t = 0;
     productList.map((item) => {
@@ -87,6 +90,13 @@ const MainPage = () => {
   };
 
   useEffect(() => {
+    const filterProducts = products.filter((item) =>
+      item.name.toLowerCase().includes(searchInput.toLowerCase())
+    );
+    setProductList(filterProducts);
+  }, [searchInput]);
+
+  useEffect(() => {
     updateData();
   }, []);
 
@@ -97,25 +107,30 @@ const MainPage = () => {
   }, [toggle]);
   return (
     <div>
-      <div className=" flex ">
-        <div className=" w-full items-center justify-center xl:w-[1200px] flex flex-wrap">
-          {products.map((item, index) => (
-            <Card
-              key={index}
-              product={item}
-              addProduct={addProductTOLocalhost}
-            />
-          ))}
+      <div className=" flex flex-col">
+        <div className=" pl-[8px] sm:pl-[20px]">
+          <Input searchInput={searchInput} setSearchInput={setSearchInput} />
         </div>
-        <div className=" hidden xl:block sticky top-2 z-10">
-          <Cart
-            productList={selectedProduct}
-            addProduct={addProductTOLocalhost}
-            removeProduct={removeProductTOLocalhost}
-            updateData={updateData}
-            deleteItem={deleteCartItem}
-            total={total}
-          />
+        <div className=" flex ">
+          <div className=" w-full items-center justify-center xl:w-[1200px] flex flex-wrap">
+            {productList.map((item, index) => (
+              <Card
+                key={index}
+                product={item}
+                addProduct={addProductTOLocalhost}
+              />
+            ))}
+          </div>
+          <div className=" hidden xl:block sticky top-2 z-10">
+            <Cart
+              productList={selectedProduct}
+              addProduct={addProductTOLocalhost}
+              removeProduct={removeProductTOLocalhost}
+              updateData={updateData}
+              deleteItem={deleteCartItem}
+              total={total}
+            />
+          </div>
         </div>
       </div>
 
